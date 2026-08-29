@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: axion-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: axion-ui
+  template:
+    metadata:
+      labels:
+        app: axion-ui
+    spec:
+      containers:
+        - name: axion-ui
+          image: axionacrdev2026.azurecr.io/axion-ui:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: axion-ui
+spec:
+  type: LoadBalancer
+  selector:
+    app: axion-ui
+  ports:
+    - port: 80
+      targetPort: 80
