@@ -3,11 +3,22 @@ name: Infrastructure Deployment
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  azure-login:
+  terraform:
+    name: Terraform Infrastructure
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: terraform
+
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Azure Login
         uses: azure/login@v2
         with:
@@ -16,3 +27,15 @@ jobs:
       - name: Verify Azure Account
         run: |
           az account show --query "{subscriptionId:id, tenantId:tenantId}" -o table
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
