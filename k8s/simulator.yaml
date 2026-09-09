@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: simulator
-          image: devopsinsiders/axion-data-simulator:latest
+          image: axionacr20260909.azurecr.io/axion-data-simulator:latest
           imagePullPolicy: Always
           env:
             - name: API_URL

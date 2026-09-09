@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ingestion
-          image: axionacrdev2026.azurecr.io/axion-ingestion-service:latest
+          image: axionacr20260909.azurecr.io/axion-ingestion-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000

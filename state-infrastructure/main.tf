@@ -14,13 +14,13 @@ provider "azurerm" {
 }
 
 resource "azurerm_storage_account" "terraform_state" {
-  name                     = "axiontfstate2026"
+  name                     = "axiontfstate20260909"
   resource_group_name      = "rg-axion-dev"
   location                 = "eastus"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
-  min_tls_version          = "TLS1_2"
+  min_tls_version                 = "TLS1_2"
   allow_nested_items_to_be_public = false
 }
 

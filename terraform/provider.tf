@@ -10,7 +10,7 @@ terraform {
 
   backend "azurerm" {
     resource_group_name  = "rg-axion-dev"
-    storage_account_name = "axiontfstate2026"
+    storage_account_name = "axiontfstate20260909"
     container_name       = "tfstate"
     key                  = "axion-infrastructure.tfstate"
   }

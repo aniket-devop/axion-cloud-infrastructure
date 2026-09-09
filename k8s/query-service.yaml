@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: query-service
-          image: axionacrdev2026.azurecr.io/axion-telemetry-query-service:latest
+          image: axionacr20260909.azurecr.io/axion-telemetry-query-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000

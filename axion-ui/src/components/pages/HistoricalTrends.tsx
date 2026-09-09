@@ -4,7 +4,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useSearchParams } from 'react-router-dom';
 import { ShareLinkButton } from '../ShareLinkButton';
 
-const API_BASE = 'http://20.75.174.83:8000';
+const API_BASE = 'http://135.234.216.36:8000';
 
 // A set of distinct colors for the correlation lines
 const COLORS = [
@@ -309,3 +309,4 @@ export function HistoricalTrends({ devices = [] }: HistoricalTrendsProps) {
     </div>
   );
 }
+

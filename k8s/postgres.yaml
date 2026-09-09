@@ -1,36 +1,44 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: axion-ingestion
+  name: axion-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: axion-ingestion
+      app: axion-db
   template:
     metadata:
       labels:
-        app: axion-ingestion
+        app: axion-db
     spec:
       containers:
-        - name: ingestion
-          image: axionacrdev2026.azurecr.io/axion-ingestion-service:latest
-          imagePullPolicy: Always
+        - name: postgres
+          image: postgres:16-alpine
           ports:
-            - containerPort: 8000
+            - containerPort: 5432
           env:
-            - name: DATABASE_URL
-              value: "postgresql://axion_user:P%40ssw01rd%40123@axion-db:5432/axion_db"
-
+            - name: POSTGRES_USER
+              value: "axion_user"
+            - name: POSTGRES_PASSWORD
+              value: "P@ssw01rd@123"
+            - name: POSTGRES_DB
+              value: "axion_db"
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-data
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: axion-ingestion
+  name: axion-db
 spec:
   selector:
-    app: axion-ingestion
+    app: axion-db
   ports:
-    - port: 8000
-      targetPort: 8000
+    - port: 5432
+      targetPort: 5432
   type: ClusterIP

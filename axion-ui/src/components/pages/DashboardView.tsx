@@ -7,7 +7,7 @@ import { Throughput } from '../Throughput';
 import { DigitalTwin } from '../DigitalTwin';
 import { ThermalCamera } from '../ThermalCamera';
 
-const API_BASE = 'http://20.75.174.83:8000';
+const API_BASE = 'http://135.234.216.36:8000';
 
 interface DashboardViewProps {
   devices: any[];
@@ -192,3 +192,4 @@ export function DashboardView({ devices, throughput, isLoggedIn, refreshInterval
     </div>
   );
 }
+

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: axion-ui
-          image: axionacrdev2026.azurecr.io/axion-ui:latest
+          image: axionacr20260909.azurecr.io/axion-ui:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
