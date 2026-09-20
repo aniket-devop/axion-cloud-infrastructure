@@ -67,53 +67,13 @@ Force-directed graph of site regions and their child assets, colour-coded by liv
 
 ![System topology graph](docs/screenshots/05-system-topology.png)
 
-### Custom domain
-
-The same deployment reached through a custom domain rather than the raw cluster IP.
-
-![Custom domain deployment](docs/screenshots/06-custom-domain.png)
-
 ---
 
 ## Architecture
 
-```
-                         ┌──────────────────────────────┐
-                         │      GitHub Actions CI/CD    │
-                         │  build → tag (SHA) → push    │
-                         └───────────────┬──────────────┘
-                                         │
-                              ┌──────────▼──────────┐
-                              │  Azure Container    │
-                              │   Registry (ACR)    │
-                              └──────────┬──────────┘
-                                         │ imagePullPolicy: Always
-┌────────────────────────────────────────▼────────────────────────────────────────┐
-│                      Azure Kubernetes Service (AKS)                             │
-│                                                                                 │
-│   ┌───────────────┐   POST /api/v1/telemetry/ingest   ┌──────────────────────┐  │
-│   │ data-simulator│ ─────────────────────────────────▶│  ingestion-service   │  │
-│   │  27 assets    │            every 5 s              │   FastAPI · asyncpg  │  │
-│   │  (Deployment) │                                   │   ClusterIP :8000    │  │
-│   └───────────────┘                                   └──────────┬───────────┘  │
-│                                                                  │ INSERT       │
-│                                                       ┌──────────▼───────────┐  │
-│                                                       │   PostgreSQL 16      │  │
-│                                                       │   ClusterIP :5432    │  │
-│                                                       └──────────┬───────────┘  │
-│                                                                  │ SELECT       │
-│   ┌───────────────┐        REST (JSON)                ┌──────────▼───────────┐  │
-│   │    axion-ui   │ ◀─────────────────────────────────│ telemetry-query-svc  │  │
-│   │ React + Nginx │                                   │  aggregation + health│  │
-│   │ LoadBalancer  │                                   │  LoadBalancer :8000  │  │
-│   └───────▲───────┘                                   └──────────────────────┘  │
-└───────────┼─────────────────────────────────────────────────────────────────────┘
-            │
-        Operator / Browser
+![Architecture diagram](docs/architecture.png)
 
-     Provisioned by Terraform:  Resource Group · ACR · AKS (system-assigned identity)
-     Remote state:              Azure Storage Account + private blob container
-```
+*Terraform provisions the Azure footprint; GitHub Actions builds and pushes container images to ACR; AKS pulls and runs the workloads; the simulator writes telemetry through the ingestion API into PostgreSQL, which the query service reads and serves to the React dashboard.*
 
 **Design decisions worth calling out**
 
