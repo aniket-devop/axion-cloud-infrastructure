@@ -346,5 +346,5 @@ Built end-to-end: infrastructure, pipelines, backend services, database design a
 ---
 
 <div align="center">
-<sub>Architected & engineered under <b>DevOps Insiders</b></sub>
+<sub>Architected & engineered as an independent portfolio project.</sub>
 </div>
