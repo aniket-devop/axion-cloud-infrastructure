@@ -1,4 +1,4 @@
-﻿apiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: axion-query-service
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: query-service
-          image: axionacr20260909.azurecr.io/axion-telemetry-query-service:latest
+          image: axionacraniket1026.azurecr.io/axion-telemetry-query-service
           ports:
             - containerPort: 8000
           env:

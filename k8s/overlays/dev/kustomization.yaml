@@ -3,12 +3,22 @@ kind: Kustomization
 namespace: axion-dev
 resources:
   - ../../base
+
 images:
-  - name: axionacr20260909.azurecr.io/axion-ingestion-service
-    newTag: latest
-  - name: axionacr20260909.azurecr.io/axion-ui
-    newTag: latest
-  - name: axionacr20260909.azurecr.io/axion-telemetry-query-service
-    newTag: latest
-  - name: axionacr20260909.azurecr.io/axion-data-simulator
-    newTag: latest
+  - name: axionacraniket1026.azurecr.io/axion-ui
+    newTag: initial
+  - name: axionacraniket1026.azurecr.io/axion-ingestion-service
+    newTag: initial
+  - name: axionacraniket1026.azurecr.io/axion-telemetry-query-service
+    newTag: initial
+  - name: axionacraniket1026.azurecr.io/axion-data-simulator
+    newTag: initial
+
+patches:
+  - target:
+      kind: Deployment
+    patch: |-
+      - op: add
+        path: /spec/template/spec/imagePullSecrets
+        value:
+          - name: acr-secret

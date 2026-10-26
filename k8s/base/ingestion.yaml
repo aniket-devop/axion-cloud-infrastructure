@@ -1,4 +1,4 @@
-﻿apiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: axion-ingestion
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ingestion
-          image: axionacr20260909.azurecr.io/axion-ingestion-service:latest
+          image: axionacraniket1026.azurecr.io/axion-ingestion-service
           ports:
             - containerPort: 8000
           env:
