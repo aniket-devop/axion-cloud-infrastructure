@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+﻿apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: axion-ingestion
@@ -15,13 +15,14 @@ spec:
       containers:
         - name: ingestion
           image: axionacr20260909.azurecr.io/axion-ingestion-service:latest
-          imagePullPolicy: Always
           ports:
             - containerPort: 8000
           env:
             - name: DATABASE_URL
-              value: "postgresql://axion_user:P%40ssw01rd%40123@axion-db:5432/axion_db"
-
+              valueFrom:
+                secretKeyRef:
+                  name: axion-db-secret
+                  key: DATABASE_URL
 ---
 apiVersion: v1
 kind: Service
