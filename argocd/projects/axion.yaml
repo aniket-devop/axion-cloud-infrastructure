@@ -1,0 +1,17 @@
+﻿apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: axion
+  namespace: argocd
+spec:
+  description: Axion platform
+  sourceRepos:
+    - https://github.com/aniket-devop/axion-cloud-infrastructure.git
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: axion-dev
+    - server: https://kubernetes.default.svc
+      namespace: axion-prod
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace

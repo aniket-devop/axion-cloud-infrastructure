@@ -14,14 +14,15 @@ spec:
     spec:
       containers:
         - name: query-service
-          image: axionacr20260909.azurecr.io/axion-telemetry-query-service:latest
-          imagePullPolicy: Always
+          image: axionacraniket1026.azurecr.io/axion-telemetry-query-service
           ports:
             - containerPort: 8000
           env:
             - name: DATABASE_URL
-              value: "postgresql://axion_user:P%40ssw01rd%40123@axion-db:5432/axion_db"
-
+              valueFrom:
+                secretKeyRef:
+                  name: axion-db-secret
+                  key: DATABASE_URL
 ---
 apiVersion: v1
 kind: Service
