@@ -22,6 +22,24 @@
 
 ---
 
+## 🎬 See it running
+
+Auto-playing previews (sped up). Click any preview to open the full screen recording of the live environment, recorded 10 Nov 2026.
+
+**1. GitOps in ArgoCD**: the root app manages `axion-dev`, `axion-prod` and `monitoring`, all **Healthy** and **Synced**.
+
+[![ArgoCD GitOps sync](docs/demo/argocd-gitops-sync.gif)](docs/demo/argocd-gitops-sync.mp4)
+
+**2. The application, live on AKS**: telemetry dashboard fed by the simulator → ingestion → PostgreSQL pipeline running in the cluster.
+
+[![Axion UI live demo](docs/demo/axion-ui-live-demo.gif)](docs/demo/axion-ui-live-demo.mp4)
+
+**3. Prometheus and Grafana**: per-namespace CPU, memory and network dashboards from kube-prometheus-stack.
+
+[![Grafana and Prometheus monitoring](docs/demo/grafana-prometheus-monitoring.gif)](docs/demo/grafana-prometheus-monitoring.mp4)
+
+---
+
 ## 📌 Overview
 
 A `git push` is the only thing a developer does. Everything after that is automated and auditable:
@@ -45,17 +63,6 @@ All cloud infrastructure (resource group, ACR, AKS and the Terraform remote-stat
 | **Environments** | `axion-dev` and `axion-prod` from one Kustomize base with per-environment overlays and a scripted promotion flow |
 | **Observability** | kube-prometheus-stack managed by ArgoCD: Prometheus, Grafana, kube-state-metrics, node-exporter |
 | **Traceability** | Every running image tag maps to a Git commit; every cluster change maps to a Git commit |
-
----
-
-## 🎬 Demo videos
-
-Click a thumbnail to watch (short screen recordings of the live environment, recorded 10 Nov 2026).
-
-| ArgoCD: GitOps sync | Application running on AKS | Prometheus & Grafana |
-|:---:|:---:|:---:|
-| [![ArgoCD demo](docs/demo/thumbs/argocd-gitops-sync.jpg)](docs/demo/argocd-gitops-sync.mp4) | [![UI demo](docs/demo/thumbs/axion-ui-live-demo.jpg)](docs/demo/axion-ui-live-demo.mp4) | [![Grafana demo](docs/demo/thumbs/grafana-prometheus-monitoring.jpg)](docs/demo/grafana-prometheus-monitoring.mp4) |
-| Four applications, all **Healthy** and **Synced** | Live telemetry dashboard served from the cluster | Per-namespace CPU, memory and network dashboards |
 
 ---
 
