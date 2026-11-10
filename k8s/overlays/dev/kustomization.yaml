@@ -7,7 +7,8 @@ images:
 - name: axionacraniket1026.azurecr.io/axion-data-simulator
   newTag: initial
 - name: axionacraniket1026.azurecr.io/axion-ingestion-service
-  newTag: initial
+  newName: axionacraniket1026.azurecr.io/axion-ingestion-service
+  newTag: "0428214"
 - name: axionacraniket1026.azurecr.io/axion-telemetry-query-service
   newTag: initial
 - name: axionacraniket1026.azurecr.io/axion-ui
