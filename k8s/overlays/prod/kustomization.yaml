@@ -11,7 +11,7 @@ images:
 - name: axionacraniket1026.azurecr.io/axion-telemetry-query-service
   newTag: bd56f91
 - name: axionacraniket1026.azurecr.io/axion-ui
-  newTag: 24dc148
+  newTag: 7e1106a
 patches:
 - patch: |-
     - op: add
