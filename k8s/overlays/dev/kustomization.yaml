@@ -10,7 +10,8 @@ images:
   newName: axionacraniket1026.azurecr.io/axion-ingestion-service
   newTag: "0428214"
 - name: axionacraniket1026.azurecr.io/axion-telemetry-query-service
-  newTag: initial
+  newName: axionacraniket1026.azurecr.io/axion-telemetry-query-service
+  newTag: bd56f91
 - name: axionacraniket1026.azurecr.io/axion-ui
   newName: axionacraniket1026.azurecr.io/axion-ui
   newTag: 24dc148
