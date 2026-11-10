@@ -1,0 +1,83 @@
+﻿name: Build & Push Telemetry Query Service
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "axion-telemetry-query-service/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  ACR_NAME: axionacr20260909
+  IMAGE: axionacr20260909.azurecr.io/axion-telemetry-query-service
+
+jobs:
+  build-and-push:
+    name: Build & Push to ACR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Login to ACR
+        run: az acr login --name ${{ env.ACR_NAME }}
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE }}
+          tags: |
+            type=sha,prefix=
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and Push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./axion-telemetry-query-service
+          file: ./axion-telemetry-query-service/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  update-manifest:
+    name: Update image tag in GitOps manifests
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: gitops-manifest-update
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install kustomize
+        run: |
+          which kustomize || (curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash && sudo mv kustomize /usr/local/bin/)
+
+      - name: Set new image tag
+        working-directory: k8s/overlays/dev
+        run: |
+          SHORT_SHA=${GITHUB_SHA::7}
+          kustomize edit set image ${{ env.IMAGE }}=${{ env.IMAGE }}:${SHORT_SHA}
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add k8s/overlays/dev/kustomization.yaml
+          git commit -m "ci: axion-telemetry-query-service -> ${GITHUB_SHA::7} [skip ci]" || exit 0
+          git pull --rebase origin main
+          git push

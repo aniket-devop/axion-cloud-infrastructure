@@ -17,13 +17,9 @@ spec:
           image: postgres:16-alpine
           ports:
             - containerPort: 5432
-          env:
-            - name: POSTGRES_USER
-              value: "axion_user"
-            - name: POSTGRES_PASSWORD
-              value: "P@ssw01rd@123"
-            - name: POSTGRES_DB
-              value: "axion_db"
+          envFrom:
+            - secretRef:
+                name: axion-db-secret
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data
