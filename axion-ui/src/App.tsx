@@ -15,7 +15,7 @@ import { SystemSettings } from './components/pages/SystemSettings';
 import { DashboardView } from './components/pages/DashboardView';
 import { NotFound } from './components/pages/NotFound';
 
-const API_BASE = 'http://135.234.216.36:8000';
+const API_BASE = '/api';
 
 function App() {
   const location = useLocation();

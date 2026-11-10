@@ -7,7 +7,7 @@ import { Throughput } from '../Throughput';
 import { DigitalTwin } from '../DigitalTwin';
 import { ThermalCamera } from '../ThermalCamera';
 
-const API_BASE = 'http://135.234.216.36:8000';
+const API_BASE = '/api';
 
 interface DashboardViewProps {
   devices: any[];
