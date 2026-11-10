@@ -13,10 +13,15 @@ provider "azurerm" {
   features {}
 }
 
+resource "azurerm_resource_group" "terraform_state" {
+  name     = "rg-axion-tfstate"
+  location = "eastus"
+}
+
 resource "azurerm_storage_account" "terraform_state" {
-  name                     = "axiontfstate20260909"
-  resource_group_name      = "rg-axion-dev"
-  location                 = "eastus"
+  name                     = "axiontfstateaniket1026"
+  resource_group_name      = azurerm_resource_group.terraform_state.name
+  location                 = azurerm_resource_group.terraform_state.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
 

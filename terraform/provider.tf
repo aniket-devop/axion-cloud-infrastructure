@@ -9,8 +9,8 @@ terraform {
   required_version = ">= 1.5.0"
 
   backend "azurerm" {
-    resource_group_name  = "rg-axion-dev"
-    storage_account_name = "axiontfstate20260909"
+    resource_group_name  = "rg-axion-tfstate"
+    storage_account_name = "axiontfstateaniket1026"
     container_name       = "tfstate"
     key                  = "axion-infrastructure.tfstate"
   }
