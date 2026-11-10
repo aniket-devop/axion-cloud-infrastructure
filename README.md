@@ -155,9 +155,11 @@ The built-in *Kubernetes / Compute Resources / Cluster* dashboard breaks usage d
 | | | |
 |:---:|:---:|:---:|
 | ![Login](docs/screenshots/01-login.png) | ![Fleet summary](docs/screenshots/02-fleet-summary.png) | ![Device diagnostics](docs/screenshots/03-device-diagnostics.png) |
-| Login | Fleet summary | Device diagnostics |
+| Login | Fleet summary | Device diagnostics: compressor digital twin and thermal view |
 | ![Digital twin trends](docs/screenshots/04-digital-twin-trends.png) | ![System topology](docs/screenshots/05-system-topology.png) | ![Custom domain](docs/screenshots/06-custom-domain.png) |
-| Digital twin trends | System topology | Custom domain |
+| Pump digital twin, live trend and throughput | System topology | Custom domain |
+
+<sub>The application screenshots were captured from earlier AKS deployments of this stack (Aug to Sep 2026). The pipeline, ArgoCD and Grafana proof above is from the 10 Nov 2026 environment.</sub>
 
 ---
 
