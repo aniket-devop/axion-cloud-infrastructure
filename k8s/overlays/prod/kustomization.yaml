@@ -5,13 +5,13 @@ resources:
 - ../../base
 images:
 - name: axionacraniket1026.azurecr.io/axion-data-simulator
-  newTag: initial
+  newTag: eaa7954
 - name: axionacraniket1026.azurecr.io/axion-ingestion-service
-  newTag: initial
+  newTag: "0428214"
 - name: axionacraniket1026.azurecr.io/axion-telemetry-query-service
-  newTag: initial
+  newTag: bd56f91
 - name: axionacraniket1026.azurecr.io/axion-ui
-  newTag: initial
+  newTag: 24dc148
 patches:
 - patch: |-
     - op: add
